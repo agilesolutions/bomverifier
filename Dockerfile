@@ -9,8 +9,8 @@ LABEL maintainer="Robert Rong <robert.rong@agile-solutions.ch>"
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Build the Go app
-RUN go build -o main .
+# first GO build and then copy this into the workdir
+COPY main .
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
