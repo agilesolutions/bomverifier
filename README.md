@@ -9,3 +9,6 @@ Scan Spring boot jar file for libraries complying to the content of bom.json. Th
 
 ## run
 bomverfier <URL bom.json>
+
+## read
+[check this](https://www.callicoder.com/docker-golang-image-container-example/)
