@@ -71,7 +71,7 @@ func main() {
  	}
  	for _, file := range files{
   		if (strings.HasSuffix(file, "jar")) {
-	  		//fmt.Println(file)
+	  		fmt.Println(file)
 			read, err := zip.OpenReader(file )
 			if err != nil {
 				msg := "Failed to open: %s"
