@@ -24,6 +24,8 @@ func main() {
     }
 
     uri := os.Args[1]
+    
+    uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
 
     fmt.Println("URI bom yaml file : ", uri )
     fmt.Println()

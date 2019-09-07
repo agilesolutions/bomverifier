@@ -14,6 +14,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 * export GOBIN=/usr/local/go/bin
 * export PATH=$PATH:$(go env GOPATH)/bin
 * go env GOPATH
+* go get gopkg.in/yaml.v2
 
 ## build
 
@@ -72,6 +73,6 @@ pipeline {
 1 [check this](https://www.callicoder.com/docker-golang-image-container-example/)
 2 [parse yaml](https://stackoverflow.com/questions/28682439/go-parse-yaml-file/28683173)
 3 [wget to file](https://stackoverflow.com/questions/11692860/how-can-i-efficiently-download-a-large-file-using-go)
-4 []()
+4 [get go package](https://gopkg.in/yaml.v2)
 5 []()
 6 []()
