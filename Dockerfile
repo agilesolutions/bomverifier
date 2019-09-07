@@ -10,7 +10,7 @@ LABEL maintainer="Robert Rong <robert.rong@agile-solutions.ch>"
 WORKDIR /app
 
 # first GO build and then copy this into the workdir
-COPY verify .
+COPY bomverify .
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
