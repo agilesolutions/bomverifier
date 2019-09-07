@@ -1,7 +1,6 @@
 package main
  
 import (
-	"encoding/json"
 	"archive/zip"
 	"fmt"
 	"log"
@@ -11,6 +10,7 @@ import (
 	"strings"
 	"net/http"
 	"gopkg.in/yaml.v2"
+	"io/ioutil"
 )
 
 
@@ -26,6 +26,8 @@ func main() {
     uri := os.Args[1]
     
     uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
+    
+    var dst = "bom.yaml"
 
     fmt.Println("URI bom yaml file : ", uri )
     fmt.Println()
@@ -38,7 +40,14 @@ func main() {
         }
     }
 
-	type bom struct {
+   filename, _ := filepath.Abs(dst)
+    yamlFile, err := ioutil.ReadFile(filename)
+
+    if err != nil {
+        panic(err)
+    }
+
+	type Bom struct {
     	Libs []struct {
             Name       string `yaml:"name"`
             Version    int    `yaml:"version"`
@@ -46,15 +55,16 @@ func main() {
 	}
 	var bom Bom
 	
-	err = yaml.Unmarshal("bom.yaml", &bom)
+	err = yaml.Unmarshal(yamlFile, &bom)
 	if err != nil {
 	    panic(err)
 	}
 
-	fmt.Print(service.libs[0].Name)
+	fmt.Print(bom.Libs[0].Name)
     
 
  	// filepath.Walk
+ 	//var inFile
  	files, err := FilePathWalkDir(".")
  	if err != nil {
   	panic(err)
@@ -72,7 +82,7 @@ func main() {
 			for _, infile := range read.File {
 				
 			
-				if err := listFiles(infile, file, expression, configuration.Copyto); err != nil {
+				if err := listFiles(infile, file, ".jar", "."); err != nil {
 				log.Fatalf("Failed to read %s from zip: %s", infile.Name, err)
 				}
 			}
