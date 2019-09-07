@@ -1,5 +1,5 @@
 libs:
-  - name: apache-commons
-    version: 80
-  - name: appache-httpclient
-    version: 443
+  - name: guava
+    version: 18.0
+  - name: classmate
+    version: 1.4.0
