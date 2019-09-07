@@ -12,6 +12,9 @@ WORKDIR /app
 # first GO build and then copy this into the workdir
 COPY bomverify .
 
+# first GO build and then copy this into the workdir
+chmod 777 *
+
 # Expose port 8080 to the outside world
 EXPOSE 8080
 

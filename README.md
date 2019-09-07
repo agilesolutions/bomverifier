@@ -10,6 +10,9 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 
 ## setup
 
+* wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+* tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
+* export PATH=$PATH:/usr/local/go/bin	
 * export GOPATH=/root/go
 * export GOBIN=/usr/local/go/bin
 * export PATH=$PATH:$(go env GOPATH)/bin
