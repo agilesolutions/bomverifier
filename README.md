@@ -6,7 +6,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 1. wget the BOM yaml file from github
 2. go into the springboot jar file zip file and discover all libraries
 3. check the compliancy againt the BOM yaml
-4. report and or break off build
+4. report and conditionally break off
 
 ## setup
 
@@ -20,6 +20,8 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 
 ```
 go build -o verify .
+
+verify https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false
 
 docker build -t agilesolutions/bomverifier:latest
 ```
