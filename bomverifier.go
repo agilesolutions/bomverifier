@@ -5,15 +5,20 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"io"
 	"path/filepath"
-	"strings"
 	"net/http"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"strings"
 )
 
 
+	type Bom struct {
+    	Libs []struct {
+            Name       string `yaml:"name"`
+            Version    int    `yaml:"version"`
+        } `yaml:"libs"`
+	}
  
  
 func main() {
@@ -47,12 +52,6 @@ func main() {
         panic(err)
     }
 
-	type Bom struct {
-    	Libs []struct {
-            Name       string `yaml:"name"`
-            Version    int    `yaml:"version"`
-        } `yaml:"libs"`
-	}
 	var bom Bom
 	
 	err = yaml.Unmarshal(yamlFile, &bom)
@@ -82,7 +81,7 @@ func main() {
 			for _, infile := range read.File {
 				
 			
-				if err := listFiles(infile, file, ".jar", "."); err != nil {
+				if err := listFiles(infile, file, ".jar", bom); err != nil {
 				log.Fatalf("Failed to read %s from zip: %s", infile.Name, err)
 				}
 			}
@@ -103,9 +102,11 @@ func FilePathWalkDir(root string) ([]string, error) {
  })
  return files, err
 }
+/*
+* LIST FILES ***********************************************************
+*/
 
-// http://www.golangprograms.com/go-program-to-extracting-or-unzip-a-zip-format-file.html
-func listFiles(file *zip.File, filename string, expression string, location string) error {
+func listFiles(file *zip.File, filename string, expression string, bom Bom) error {
 	fileread, err := file.Open()
 	if err != nil {
 		msg := "Failed to open zip %s for reading: %s"
@@ -115,46 +116,10 @@ func listFiles(file *zip.File, filename string, expression string, location stri
  
  	if (strings.Contains(file.Name, expression)) {
  		// display zipfilename and contained file
-		fmt.Fprintf(os.Stdout, "File extracted from %s : copied to -> %s/%s:", filename, location, file.Name) 	
+		//fmt.Fprintf(os.Stdout, "%s ", strings.Split(file.Name,"lib/")[1])
+		fmt.Fprintf(os.Stdout, " frm origin %s ", bom.Libs[0].Name)
 	    fmt.Println()
-	    
-	    
-	    zippedFile, err := file.Open()
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer zippedFile.Close()
-
-   		desktop := location +"/" + file.Name
-   		
-		
-		
-		outputFile, err := os.OpenFile(
-		
-				desktop,
-				os.O_WRONLY|os.O_CREATE|os.O_TRUNC,
-				file.Mode(),
-			)
-			if err != nil {
-				log.Fatal("*** error opening file ",err)
-			}
-	    
-		defer outputFile.Close()
-
-
- 
-		_, err = io.Copy(outputFile, zippedFile)
-		if err != nil {
-			log.Fatal(err)
-		}
     }
-
- 
-	if err != nil {
-		msg := "Failed to read zip %s for reading: %s"
-		return fmt.Errorf(msg, file.Name, err)
-	}
- 
  
 	return nil
 }
