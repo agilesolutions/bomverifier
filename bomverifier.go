@@ -30,7 +30,7 @@ func main() {
 
     uri := os.Args[1]
     
-    uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
+    //uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
     
     var dst = "bom.yaml"
 

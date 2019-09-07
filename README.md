@@ -32,7 +32,7 @@ docker build -t agilesolutions/bomverifier:latest
 ```
 
 ## run
-bomverfier <URL bom.json>
+bomverfier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml
 
 ## include on pipeline
 
