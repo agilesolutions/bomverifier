@@ -1,6 +1,13 @@
 # BOM Bill of Material verifier
 Scan Spring boot jar file for libraries complying to the content of bom.json. This app is going to be wrapped on container and be run as a jenkins pipeline 2.0 agent.
 Let the jenkins build fail if any of the included libraries on that spring boot app are violating the compliancy of the BOM test.
+## functionality
+
+1. wget the BOM yaml file from github
+2. go into the springboot jar file zip file and discover all libraries
+3. check the compliancy againt the BOM yaml
+4. report and or break off build
+
 ## setup
 
 * export GOPATH=/root/go
@@ -35,7 +42,7 @@ pipeline {
           }
       }
       steps {
-        sh 'main http;//whatever.com/bom.json'
+        sh 'main http;//whatever.com/bom.yaml'
       }
     }
     stage('Build') {
