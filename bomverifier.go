@@ -16,7 +16,7 @@ import (
 	type Bom struct {
     	Libs []struct {
             Name       string `yaml:"name"`
-            Version    int    `yaml:"version"`
+            Version    string    `yaml:"version"`
         } `yaml:"libs"`
 	}
  
@@ -116,9 +116,19 @@ func listFiles(file *zip.File, filename string, expression string, bom Bom) erro
  
  	if (strings.Contains(file.Name, expression)) {
  		// display zipfilename and contained file
-		//fmt.Fprintf(os.Stdout, "%s ", strings.Split(file.Name,"lib/")[1])
-		fmt.Fprintf(os.Stdout, " frm origin %s ", bom.Libs[0].Name)
-	    fmt.Println()
+ 		for i := 0; i < len(bom.Libs); i++ {
+			//fmt.Println(bom.Libs[i])
+			
+	 		if strings.Compare(strings.Split(file.Name,"lib/")[1],fmt.Sprintf("%s-%s.jar", bom.Libs[i].Name, bom.Libs[i].Version) ) != 0 {
+ 				 fmt.Fprintf(os.Stdout, "offfending library found %s ", strings.Split(file.Name,"lib/")[1])
+			     fmt.Println()
+			}
+			
+		}
+ 		
+ 		
+		
+		//fmt.Fprintf(os.Stdout, " frm origin %s ", bom.Libs[0].Name)
     }
  
 	return nil
