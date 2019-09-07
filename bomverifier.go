@@ -120,7 +120,7 @@ func listFiles(file *zip.File, filename string, expression string, bom Bom) erro
 			//fmt.Println(bom.Libs[i])
 			
 	 		if strings.Compare(strings.Split(file.Name,"lib/")[1],fmt.Sprintf("%s-%s.jar", bom.Libs[i].Name, bom.Libs[i].Version) ) != 0 {
- 				 fmt.Fprintf(os.Stdout, "offfending library found %s ", strings.Split(file.Name,"lib/")[1])
+ 				 fmt.Fprintf(os.Stdout, "offending library found %s ", strings.Split(file.Name,"lib/")[1])
 			     fmt.Println()
 			}
 			
