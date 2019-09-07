@@ -9,56 +9,56 @@ import (
 	"io"
 	"path/filepath"
 	"strings"
+	"net/http"
+	"gopkg.in/yaml.v2"
 )
+
+
  
  
 func main() {
 
     if len(os.Args) != 2 {
-        fmt.Println("Usage:", os.Args[0], "token")
+        fmt.Println("Usage:", os.Args[0], "uri")
         return
     }
 
-    expression := os.Args[1]
+    uri := os.Args[1]
 
-    fmt.Println("searching for zip files with names containing : ", expression )
+    fmt.Println("URI bom yaml file : ", uri )
     fmt.Println()
-
-	// https://stackoverflow.com/questions/16465705/how-to-handle-configuration-in-go
-	type Configuration struct {
-	    Copyfrom    string
-	    Copyto		string
-	}
-	
-	dir, _ := os.Getwd()
-	fmt.Println(dir)
-
-	file, _ := os.Open(dir +  "\\config.json")
-	
-	defer file.Close()
-	decoder := json.NewDecoder(file)
-	configuration := Configuration{}
-	err := decoder.Decode(&configuration)
-	if err != nil {
-  		fmt.Println("error reading config file : ", err)
-	}
-	fmt.Fprintf(os.Stdout, "reading PDF files from  -> %s:", configuration.Copyfrom) 	
-	fmt.Println()
-	fmt.Fprintf(os.Stdout, "writing PDF files to  -> %s:", configuration.Copyto) 	
-	fmt.Println()
-	fmt.Println()
-	
-
     
+    fmt.Printf("DownloadToFile From: %s.\n", uri)
+    if d, err := HTTPDownload(uri); err == nil {
+        fmt.Printf("downloaded %s.\n", uri)
+        if WriteFile("bom.yaml", d) == nil {
+            fmt.Printf("saved %s as %s\n", uri, dst)
+        }
+    }
+
+	type bom struct {
+    	Libs []struct {
+            Name       string `yaml:"name"`
+            Version    int    `yaml:"version"`
+        } `yaml:"libs"`
+	}
+	var bom Bom
+	
+	err = yaml.Unmarshal("bom.yaml", &bom)
+	if err != nil {
+	    panic(err)
+	}
+
+	fmt.Print(service.libs[0].Name)
     
 
  	// filepath.Walk
- 	files, err := FilePathWalkDir(configuration.Copyfrom)
+ 	files, err := FilePathWalkDir(".")
  	if err != nil {
   	panic(err)
  	}
  	for _, file := range files{
-  		if (strings.HasSuffix(file, "zip")) {
+  		if (strings.HasSuffix(file, "jar")) {
 	  		//fmt.Println(file)
 			read, err := zip.OpenReader(file )
 			if err != nil {
@@ -147,4 +147,28 @@ func listFiles(file *zip.File, filename string, expression string, location stri
 	return nil
 }
 
+
+func HTTPDownload(uri string) ([]byte, error) {
+    fmt.Printf("HTTPDownload From: %s.\n", uri)
+    res, err := http.Get(uri)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer res.Body.Close()
+    d, err := ioutil.ReadAll(res.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("ReadFile: Size of download: %d\n", len(d))
+    return d, err
+}
+
+func WriteFile(dst string, d []byte) error {
+    fmt.Printf("WriteFile: Size of download: %d\n", len(d))
+    err := ioutil.WriteFile(dst, d, 0444)
+    if err != nil {
+        log.Fatal(err)
+    }
+    return err
+}
 

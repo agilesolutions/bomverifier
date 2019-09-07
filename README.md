@@ -18,7 +18,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 ## build
 
 ```
-go build -o main .
+go build -o verify .
 
 docker build -t agilesolutions/bomverifier:latest
 ```
@@ -68,4 +68,10 @@ pipeline {
 
 
 ## read
-[check this](https://www.callicoder.com/docker-golang-image-container-example/)
+
+1 [check this](https://www.callicoder.com/docker-golang-image-container-example/)
+2 [parse yaml](https://stackoverflow.com/questions/28682439/go-parse-yaml-file/28683173)
+3 [wget to file](https://stackoverflow.com/questions/11692860/how-can-i-efficiently-download-a-large-file-using-go)
+4 []()
+5 []()
+6 []()

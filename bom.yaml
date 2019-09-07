@@ -1,0 +1,5 @@
+libs:
+  - name: apache-commons
+    version: 80
+  - name: appache-httpclient
+    version: 443
