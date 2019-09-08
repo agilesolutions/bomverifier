@@ -9,3 +9,5 @@ libs:
     version: 1.7.25
   - name : logback-classic
     version: 1.2.3
+  - name : snakeyaml
+    version : 1.23
