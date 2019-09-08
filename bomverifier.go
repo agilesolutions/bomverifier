@@ -80,8 +80,7 @@ func main() {
 
 			for _, infile := range read.File {
 				
-			
-				if err := listFiles(infile, file, ".jar", bom); err != nil {
+				if err := listFiles(infile.Name, file, bom); err != nil {
 				log.Fatalf("Failed to read %s from zip: %s", infile.Name, err)
 				}
 			}
@@ -106,25 +105,28 @@ func FilePathWalkDir(root string) ([]string, error) {
 * LIST FILES ***********************************************************
 */
 
-func listFiles(file *zip.File, filename string, expression string, bom Bom) error {
-	fileread, err := file.Open()
-	if err != nil {
-		msg := "Failed to open zip %s for reading: %s"
-		return fmt.Errorf(msg, file.Name, err)
-	}
-	defer fileread.Close()
+func listFiles(file string, filename string, bom Bom) error {
+
+	var match = false;
+
  
- 	if (strings.Contains(file.Name, expression)) {
- 		// display zipfilename and contained file
+ 	if (strings.Contains(file, ".jar")) {
+		//fmt.Println(strings.Split(file,"lib/")[1])
+		
+ 		
  		for i := 0; i < len(bom.Libs); i++ {
-			//fmt.Println(bom.Libs[i])
 			
-	 		if strings.Compare(strings.Split(file.Name,"lib/")[1],fmt.Sprintf("%s-%s.jar", bom.Libs[i].Name, bom.Libs[i].Version) ) != 0 {
- 				 fmt.Fprintf(os.Stdout, "offending library found %s ", strings.Split(file.Name,"lib/")[1])
-			     fmt.Println()
+	 		if strings.Compare(strings.Split(file,"lib/")[1],fmt.Sprintf("%s-%s.jar", bom.Libs[i].Name, bom.Libs[i].Version) ) == 0 {
+	 		     match = true;
 			}
 			
 		}
+		
+		if match ==false  {
+    		fmt.Println("offending library : ", strings.Split(file,"lib/")[1] )
+		}
+		
+		
  		
  		
 		
