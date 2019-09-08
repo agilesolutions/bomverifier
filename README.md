@@ -24,7 +24,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 ## build
 
 ```
-go build -o bomverify .
+go build -o bomverifier .
 
 verify https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false
 
