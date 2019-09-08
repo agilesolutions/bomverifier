@@ -18,6 +18,7 @@ RUN chmod 777 *
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
+# dont forget to install cat, used by jenkins agents to tail a process on that container
 RUN apt-get install coreutils
 
 # Command to run the executable
