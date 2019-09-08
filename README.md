@@ -36,7 +36,7 @@ bomverfier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/b
 
 ## now run this docker agent on a jenkins pipeline, lets spin up jenkins
 
-* [goto play with docker](docker run -d --name jenkins --user root --privileged=true -p 8080:8080 -v /jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean)
+* [goto play with docker](https://labs.play-with-docker.com/)
 * [or of that doesnt work go to katacoda](https://www.katacoda.com/courses/kubernetes/helm-package-manager)
 * create directory /jenkins
 * docker run -d --name jenkins --user root --privileged=true -p 8080:8080 -v /jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean

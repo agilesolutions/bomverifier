@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'agilesolutions:bomverifier'
+            image 'agilesolutions/bomverifier'
         }
     }
     stages {
