@@ -26,7 +26,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 ```
 go build -o bomverifier .
 
-verify https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false
+bomverifier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false
 
 docker build -t agilesolutions/bomverifier:latest .
 ```
