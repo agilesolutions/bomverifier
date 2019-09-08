@@ -8,7 +8,7 @@ pipeline {
     stage('Build') {
       agent {
           docker {
-              image 'agilesolutions/bomverifier'
+              image 'kut'
           }
       }
       steps {
