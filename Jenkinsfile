@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'bomverifier'
+                sh 'bomverifier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false'
             }
         }
     }
