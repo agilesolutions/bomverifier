@@ -34,6 +34,17 @@ docker build -t agilesolutions/bomverifier:latest
 ## run
 bomverfier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml
 
+## now run this docker agent on a jenkins pipeline, lets spin up jenkins
+
+* create directory /jenkins
+* docker run -d --name jenkins --user root --privileged=true -p 8080:8080 -v /jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
+* docker logs -f jenkins
+* docker exec -ti jenkins bash
+* docker ps -a
+* browse to http://localhost:8080 and wait until the Unlock Jenkins page appears.
+* get password from /jenkins/secrets/initialAdminPassword
+* create new pipeline job from https://github.com/agilesolutions/bomverifier.git
+
 ## include on pipeline
 
 ```
