@@ -2,7 +2,7 @@ pipeline {
   agent none
   environment {
     URL = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
-    BREAK-BUILD = "false"
+    BREAK_BUILD = "false"
   }
   stages {
     stage('Build') {
