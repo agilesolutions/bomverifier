@@ -10,6 +10,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"strings"
+	"flag"
 )
 
 
@@ -23,22 +24,28 @@ import (
  
 func main() {
 
-    if len(os.Args) != 2 {
-        fmt.Println("Usage:", os.Args[0], "uri")
-        return
-    }
+	exitCode := 0
 
-    uri := os.Args[1]
+    
+    uri := flag.String("text", "", "BOM yaml file URI.")
+    terminate := flag.Bool("unique", false, "Terminate pipeline on violations.")
+    flag.Parse()
+
+
+    if *uri == "" {
+        flag.PrintDefaults()
+        os.Exit(1)
+    }
     
     //uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
     
     var dst = "bom.yaml"
 
-    fmt.Println("URI bom yaml file : ", uri )
-    fmt.Println()
+    fmt.Printf("URI bom yaml file : %s\n", uri )
     
     fmt.Printf("DownloadToFile From: %s.\n", uri)
-    if d, err := HTTPDownload(uri); err == nil {
+    
+    if d, err := HTTPDownload(*uri); err == nil {
         fmt.Printf("downloaded %s.\n", uri)
         if WriteFile("bom.yaml", d) == nil {
             fmt.Printf("saved %s as %s\n", uri, dst)
@@ -58,8 +65,6 @@ func main() {
 	if err != nil {
 	    panic(err)
 	}
-
-	fmt.Print(bom.Libs[0].Name)
     
 
  	// filepath.Walk
@@ -80,7 +85,7 @@ func main() {
 
 			for _, infile := range read.File {
 				
-				if err := listFiles(infile.Name, file, bom); err != nil {
+				if err := listFiles(infile.Name, file, bom, &exitCode); err != nil {
 				log.Fatalf("Failed to read %s from zip: %s", infile.Name, err)
 				}
 			}
@@ -88,7 +93,7 @@ func main() {
   		}
  	}
 
-
+	os.Exit(exitCode)
 }
 
 func FilePathWalkDir(root string) ([]string, error) {
@@ -105,7 +110,7 @@ func FilePathWalkDir(root string) ([]string, error) {
 * LIST FILES ***********************************************************
 */
 
-func listFiles(file string, filename string, bom Bom) error {
+func listFiles(file string, filename string, bom Bom, exitCode *int) error {
 
 	var match = false;
 
@@ -124,6 +129,7 @@ func listFiles(file string, filename string, bom Bom) error {
 		
 		if match ==false  {
     		fmt.Println("offending library : ", strings.Split(file,"lib/")[1] )
+    		*exitCode = 1
 		}
 		
 		
