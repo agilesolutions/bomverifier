@@ -26,26 +26,26 @@ func main() {
 
 	exitCode := 0
 
+	terminate := flag.Bool("t", false, "Terminate jenkins pipeline on violation.")
     
-    uri := flag.String("text", "", "BOM yaml file URI.")
-    terminate := flag.Bool("unique", false, "Terminate pipeline on violations.")
     flag.Parse()
-
-
-    if *uri == "" {
-        flag.PrintDefaults()
-        os.Exit(1)
+	
+    if len(os.Args) != 2 {
+        fmt.Println("Usage:", os.Args[0], "URI BOM Bill of Material YAML file...")
+        return
     }
+    
+    uri := os.Args[1]
     
     //uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
     
     var dst = "bom.yaml"
 
-    fmt.Printf("URI bom yaml file : %s\n", uri )
+    fmt.Printf("URI bom yaml file : %s termination is : &t\n", uri, terminate )
     
     fmt.Printf("DownloadToFile From: %s.\n", uri)
     
-    if d, err := HTTPDownload(*uri); err == nil {
+    if d, err := HTTPDownload(uri); err == nil {
         fmt.Printf("downloaded %s.\n", uri)
         if WriteFile("bom.yaml", d) == nil {
             fmt.Printf("saved %s as %s\n", uri, dst)
