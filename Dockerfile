@@ -20,6 +20,3 @@ EXPOSE 8080
 
 # dont forget to install cat, used by jenkins agents to tail a process on that container
 RUN apt-get install coreutils
-
-# Command to run the executable
-ENTRYPOINT ["/bin/bash"]
