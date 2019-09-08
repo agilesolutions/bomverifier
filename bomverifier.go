@@ -25,23 +25,23 @@ import (
 func main() {
 
 	exitCode := 0
+	
+	// https://www.dotnetperls.com/flag-go
+    param1 := flag.String("url", "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml", "URL BOM bill of material yaml file.")
 
-	terminate := flag.Bool("t", false, "Terminate jenkins pipeline on violation.")
+	param2 := flag.Bool("f", false, "Terminate jenkins pipeline on violation.")
     
     flag.Parse()
 	
-    if len(os.Args) != 2 {
-        fmt.Println("Usage:", os.Args[0], "URI BOM Bill of Material YAML file...")
-        return
-    }
-    
-    uri := os.Args[1]
+	uri := *param1
+	terminate := *param2
+	
     
     //uri = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
     
     var dst = "bom.yaml"
 
-    fmt.Printf("URI bom yaml file : %s termination is : &t\n", uri, terminate )
+    fmt.Printf("URI bom yaml file : %s termination is : &s\n", uri, terminate )
     
     fmt.Printf("DownloadToFile From: %s.\n", uri)
     
