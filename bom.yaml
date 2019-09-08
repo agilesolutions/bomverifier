@@ -11,3 +11,5 @@ libs:
     version: 1.2.3
   - name : snakeyaml
     version : 1.23
+  - name : snakeyaml
+    version : 1.23
