@@ -12,7 +12,7 @@ pipeline {
           }
       }
       steps {
-        sh 'bomverifier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml'
+        sh '/app/bomverifier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml'
       }
     }
   }

@@ -10,10 +10,10 @@ LABEL maintainer="Robert Rong <robert.rong@agile-solutions.ch>"
 WORKDIR /app
 
 # first GO build and then copy this into the workdir
-COPY bomverifier .
+COPY bomverifier . 
 
 # extend PATH
-ENV PATH="/app:${PATH}"
+ENV PATH="${PATH}:/app"
 
 # first GO build and then copy this into the workdir
 RUN chmod 777 *
