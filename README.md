@@ -28,7 +28,7 @@ go build -o bomverify .
 
 verify https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false
 
-docker build -t agilesolutions/bomverifier:latest
+docker build -t agilesolutions/bomverifier:latest .
 ```
 
 ## run
