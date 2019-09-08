@@ -1,7 +1,7 @@
 pipeline {
   agent none
   environment {
-    URL = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
+    BOM_URL = "https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml"
     BREAK_BUILD = "false"
   }
   stages {
