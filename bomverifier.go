@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"strings"
 	"flag"
+	"crypto/tls"
 )
 
 
@@ -45,6 +46,7 @@ func main() {
     
     fmt.Printf("DownloadToFile From: %s.\n", uri)
     
+    http.DefaultTransport.(*http.Transport).TLSClientConfig - &tls.Config(InsecureSkipVerify: true)
     if d, err := HTTPDownload(uri); err == nil {
         fmt.Printf("downloaded %s.\n", uri)
         if WriteFile("bom.yaml", d) == nil {
