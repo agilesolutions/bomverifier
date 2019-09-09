@@ -32,7 +32,7 @@ docker build -t agilesolutions/bomverifier:latest .
 ```
 
 ## run
-bomverfier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml
+bomverfier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -terminate
 
 ## now run this docker agent on a jenkins pipeline, lets spin up jenkins
 
