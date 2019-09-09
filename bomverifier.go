@@ -110,7 +110,7 @@ func FilePathWalkDir(root string) ([]string, error) {
 * LIST FILES ***********************************************************
 */
 
-func listFiles(file string, filename string, bom Bom, exitCode *int) error {
+func listFiles(file string, filename string, bom Bom, exitCode *int, terminate bool) error {
 
 	var match = false;
 
@@ -129,7 +129,9 @@ func listFiles(file string, filename string, bom Bom, exitCode *int) error {
 		
 		if match ==false  {
     		fmt.Println("offending library : ", strings.Split(file,"lib/")[1] )
-    		*exitCode = 1
+			if terminate == true {		
+				*exitCode = 1
+			}
 		}
 		
 		
