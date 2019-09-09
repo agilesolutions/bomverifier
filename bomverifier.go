@@ -46,7 +46,7 @@ func main() {
     
     fmt.Printf("DownloadToFile From: %s.\n", uri)
     
-    http.DefaultTransport.(*http.Transport).TLSClientConfig - &tls.Config(InsecureSkipVerify: true)
+	http.DefaultTransport.(*http.Transport).TLSClientConfig - &tls.Config{InsecureSkipVerify: true}
     if d, err := HTTPDownload(uri); err == nil {
         fmt.Printf("downloaded %s.\n", uri)
         if WriteFile("bom.yaml", d) == nil {
@@ -87,7 +87,7 @@ func main() {
 
 			for _, infile := range read.File {
 				
-				if err := listFiles(infile.Name, file, bom, &exitCode); err != nil {
+				if err := listFiles(infile.Name, file, bom, &exitCode, terminate); err != nil {
 				log.Fatalf("Failed to read %s from zip: %s", infile.Name, err)
 				}
 			}
