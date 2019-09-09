@@ -26,7 +26,7 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 ```
 go build -o bomverifier .
 
-bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -f=true
+bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -terminate
 
 docker build -t agilesolutions/bomverifier:latest .
 ```
@@ -62,7 +62,7 @@ pipeline {
           }
       }
       steps {
-        sh 'bomverifier https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml false'
+        sh 'bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -terminate'
       }
     }
     stage('Build') {
