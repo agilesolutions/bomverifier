@@ -1,11 +1,11 @@
 # BOM Bill of Material verifier
-Scan Spring boot jar file for libraries complying to the content of bom.yaml. This app is going to be wrapped on container and be run as a jenkins pipeline 2.0 agent.
+Scan Spring boot jar file for libraries complying to the content of bom.txt. This app is going to be wrapped on container and be run as a jenkins pipeline 2.0 agent.
 Let the jenkins build fail if any of the included libraries on that spring boot app are violating the compliancy of the BOM test.
 ## functionality
 
-1. wget the BOM yaml file from github
+1. wget the BOM txt file from github
 2. go into the springboot jar file zip file and discover all libraries
-3. check the compliancy againt the BOM yaml
+3. check the compliancy againt the BOM txt
 4. report and conditionally break off
 
 ## setup
@@ -19,14 +19,13 @@ Let the jenkins build fail if any of the included libraries on that spring boot 
 * export GOBIN=/usr/local/go/bin
 * export PATH=$PATH:$(go env GOPATH)/bin
 * go env GOPATH
-* go get gopkg.in/yaml.v2
 
 ## build
 
 ```
 go build -o bomverifier .
 
-bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -terminate
+bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.txt -terminate
 
 docker build -t agilesolutions/bomverifier:latest .
 ```
@@ -62,7 +61,7 @@ pipeline {
           }
       }
       steps {
-        sh 'bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.yaml -terminate'
+        sh 'bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.txt -terminate'
       }
     }
     stage('Build') {
