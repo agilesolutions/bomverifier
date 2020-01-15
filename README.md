@@ -30,6 +30,13 @@ bomverifier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/ma
 docker build -t agilesolutions/bomverifier:latest .
 ```
 
+## GO build and Docker build through Multistage Docker builds
+GO compile this code and produce a Docker image by simply running
+
+```
+docker build -t agilesolutions/bomverifier:latest .
+```
+
 ## run
 bomverfier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/master/bom.txt -terminate
 
