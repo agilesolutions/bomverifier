@@ -35,7 +35,9 @@ bomverfier -url=https://raw.githubusercontent.com/agilesolutions/bomverifier/mas
 
 ## where to find the Springboot BOM details and release trains
 
-* [spring-boot-dependencies BOM](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-dependencies/pom.xml)
+* [Tutorial on Maven BOM and Spring](https://www.baeldung.com/spring-maven-bom)
+* [Ablout Spring Boot and Clou BOM and Release Trains](https://spring.io/blog/2019/07/24/simplifying-the-spring-cloud-release-train)
+* [spring-boot-dependencies BOM](https://github.com/mahendra-shinde/maven-repo-springboot/blob/master/repository/org/springframework/spring-framework-bom/5.1.8.RELEASE/spring-framework-bom-5.1.8.RELEASE.pom)
 
 ## now run this docker agent on a jenkins pipeline, lets spin up jenkins
 
@@ -92,9 +94,8 @@ pipeline {
 
 ## read
 
-1 [check this](https://www.callicoder.com/docker-golang-image-container-example/)
-2 [parse yaml](https://stackoverflow.com/questions/28682439/go-parse-yaml-file/28683173)
-3 [wget to file](https://stackoverflow.com/questions/11692860/how-can-i-efficiently-download-a-large-file-using-go)
-4 [get go package](https://gopkg.in/yaml.v2)
-5 [jenkins pipelines and docker agents](https://jenkins.io/doc/book/pipeline/docker/)
-6 []()
+* [check this](https://www.callicoder.com/docker-golang-image-container-example/)
+* [parse yaml](https://stackoverflow.com/questions/28682439/go-parse-yaml-file/28683173)
+* [wget to file](https://stackoverflow.com/questions/11692860/how-can-i-efficiently-download-a-large-file-using-go)
+* [get go package](https://gopkg.in/yaml.v2)
+* [jenkins pipelines and docker agents](https://jenkins.io/doc/book/pipeline/docker/)
